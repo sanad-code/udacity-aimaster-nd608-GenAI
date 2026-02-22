@@ -112,6 +112,7 @@ def format_context(documents: List[str], metadatas: List[Dict]) -> str:
     # Loop through paired documents and their metadata using enumeration
     for i, (doc, meta) in enumerate(zip(documents, metadatas)):
         # Extract mission information from metadata with fallback value
+        # I have used unkown for the fallback value as the embedding pipeline returns unkown if no mission.
         mission = meta.get("mission", "Unknown Mission")
         # Clean up mission name formatting (replace underscores, capitalize)
         mission = mission.replace("_", " ").title()

@@ -12,7 +12,6 @@ Supported data sources:
 - Apollo 11 Textract extracted data (text files only)
 - Challenger transcribed audio data (text files only)
 """
-
 import os
 import json
 import logging
@@ -125,9 +124,11 @@ class ChromaEmbeddingPipelineTextOnly:
             
             # Try to break at sentence boundaries
             if end < len(text):
-                # Look for sentence-ending punctuation near the end
+                # Break at the end line punctuation
                 for sep in ['. ', '! ', '? ', '\n\n', '\n']:
+                    # Check if one of these separators exists between midpoint and end
                     last_sep = text.rfind(sep, start + self.chunk_size // 2, end)
+                    # If found, then just break at the separator, taking into consideration seprator length 1 or 2
                     if last_sep != -1:
                         end = last_sep + len(sep)
                         break
@@ -142,12 +143,14 @@ class ChromaEmbeddingPipelineTextOnly:
                 chunk_metadata['chunk_index'] = chunk_index
                 chunk_metadata['chunk_size'] = len(chunk_text)
                 chunks.append((chunk_text, chunk_metadata))
+                # Incrementing the chunk index for the metadata of the next chunk
                 chunk_index += 1
             
-            # Move start with overlap
+            # Set the start of the next chunk by subtracting the overlap from the end 
+            # to ensure text chunks overlaps, as long as it is not the end of the text
             start = end - self.chunk_overlap if end < len(text) else end
         
-        # Update total_chunks in all chunk metadata
+        # At the end we loop over all the chunks and update the total_chunks field for all chunks.
         for i, (chunk_text, chunk_meta) in enumerate(chunks):
             chunk_meta['total_chunks'] = len(chunks)
         
@@ -275,8 +278,8 @@ class ChromaEmbeddingPipelineTextOnly:
         try:
             # Call OpenAI embeddings API
             response = self.openai_client.embeddings.create(
-                model=self.embedding_model,
-                input=text
+                input=text,
+                model=self.embedding_model
             )
             # Return embedding vector
             return response.data[0].embedding
@@ -467,15 +470,16 @@ class ChromaEmbeddingPipelineTextOnly:
         
         stats = {'added': 0, 'updated': 0, 'skipped': 0}
         
-        # Handle replace mode: delete all existing documents from file first
+        # In replace mode I need first to delete all documents before adding them.
         if update_mode == 'replace':
             existing_docs = self.get_file_documents(file_path)
             if existing_docs:
                 self.collection.delete(ids=existing_docs)
                 logger.info(f"Replaced {len(existing_docs)} existing documents for {file_path.name}")
         
-        # Process documents in batches
+        # Process documents in batches using the batch_size
         for i in range(0, len(documents), batch_size):
+            # Slice the documents for the current batch
             batch = documents[i:i + batch_size]
             
             batch_ids = []
@@ -510,14 +514,14 @@ class ChromaEmbeddingPipelineTextOnly:
                     logger.error(f"Error getting embedding for {doc_id}: {e}")
                     continue
             
-            # Add batch to collection
+            # After skipping and updating documents we are left with add batch to collection
             if batch_ids:
                 try:
                     self.collection.add(
-                        ids=batch_ids,
                         documents=batch_texts,
+                        embeddings=batch_embeddings,
                         metadatas=batch_metadatas,
-                        embeddings=batch_embeddings
+                        ids=batch_ids
                     )
                     stats['added'] += len(batch_ids)
                 except Exception as e:

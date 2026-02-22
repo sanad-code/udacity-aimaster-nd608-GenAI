@@ -1,0 +1,183 @@
+# NASA Mission Intelligence - Evaluation Dataset
+
+This file contains sample questions used for testing the RAG system, along with expected response characteristics.
+
+## Test Questions and Expected Responses
+
+### Question 1: Apollo 11 Moon Landing
+**Question:** "What happened during the Apollo 11 moon landing?"
+
+**Expected Response Should Include:**
+- Date: July 20, 1969
+- Neil Armstrong and Buzz Aldrin landed on the Moon
+- "That's one small step for man, one giant leap for mankind"
+- Eagle lunar module landed in the Sea of Tranquility
+- Michael Collins remained in orbit in the Command Module
+
+**RAGAS Metrics Expected:**
+- Context Precision: High (relevant documents about Apollo 11 landing)
+- Context Recall: High (covers key landing events)
+- Faithfulness: High (stays true to source documents)
+- Answer Relevancy: High (directly answers the question)
+
+---
+
+### Question 2: Apollo 13 Crisis
+**Question:** "What problem occurred during the Apollo 13 mission and how did the crew survive?"
+
+**Expected Response Should Include:**
+- Oxygen tank explosion on April 13, 1970
+- "Houston, we've had a problem"
+- Crew: Jim Lovell, Jack Swigert, Fred Haise
+- Used lunar module as lifeboat
+- Successfully returned to Earth despite the crisis
+- Ground control and crew improvisation saved the mission
+
+**RAGAS Metrics Expected:**
+- Context Precision: High (relevant Apollo 13 crisis documents)
+- Context Recall: High (covers the problem and solution)
+- Faithfulness: High (accurate to source material)
+- Answer Relevancy: High (addresses both parts of the question)
+
+---
+
+### Question 3: Apollo 11 Crew Members
+**Question:** "Who were the crew members of Apollo 11?"
+
+**Expected Response Should Include:**
+- Neil Armstrong (Commander)
+- Buzz Aldrin (Lunar Module Pilot)
+- Michael Collins (Command Module Pilot)
+- Armstrong and Aldrin walked on the Moon
+- Collins stayed in lunar orbit
+
+**RAGAS Metrics Expected:**
+- Context Precision: High (specific crew information)
+- Context Recall: High (all three crew members mentioned)
+- Faithfulness: High (factually correct)
+- Answer Relevancy: Very High (direct answer to question)
+
+---
+
+### Question 4: Challenger Disaster
+**Question:** "What caused the Challenger disaster?"
+
+**Expected Response Should Include:**
+- Date: January 28, 1986
+- O-ring failure in the right solid rocket booster
+- Cold weather conditions contributed to failure
+- Seven crew members lost
+- Launch decision despite engineering concerns
+
+**RAGAS Metrics Expected:**
+- Context Precision: High (relevant Challenger documents)
+- Context Recall: High (covers cause and context)
+- Faithfulness: High (accurate technical details)
+- Answer Relevancy: High (explains the cause)
+
+---
+
+### Question 5: Apollo Missions Timeline
+**Question:** "When did Apollo 11 and Apollo 13 missions take place?"
+
+**Expected Response Should Include:**
+- Apollo 11: Launched July 16, 1969; Landed July 20, 1969
+- Apollo 13: Launched April 11, 1970; Crisis on April 13, 1970
+- Returned safely to Earth April 17, 1970
+
+**RAGAS Metrics Expected:**
+- Context Precision: High (specific date information)
+- Context Recall: High (covers both missions)
+- Faithfulness: High (accurate dates)
+- Answer Relevancy: Very High (direct timeline answer)
+
+---
+
+### Question 6: Technical Details
+**Question:** "What was the Eagle in the Apollo 11 mission?"
+
+**Expected Response Should Include:**
+- Eagle was the Lunar Module (LM)
+- Carried Armstrong and Aldrin to the lunar surface
+- Separated from Command Module Columbia
+- Used for landing and ascent from Moon
+
+**RAGAS Metrics Expected:**
+- Context Precision: High (specific technical documents)
+- Context Recall: High (explains the Eagle's role)
+- Faithfulness: High (accurate technical information)
+- Answer Relevancy: High (clearly defines Eagle)
+
+---
+
+### Question 7: Mission Control Communications
+**Question:** "What famous phrase did Neil Armstrong say when stepping on the Moon?"
+
+**Expected Response Should Include:**
+- "That's one small step for man, one giant leap for mankind"
+- Said when first stepping onto the lunar surface
+- Historic moment in human spaceflight
+
+**RAGAS Metrics Expected:**
+- Context Precision: Very High (specific quote)
+- Context Recall: High (provides full context)
+- Faithfulness: Very High (exact quote)
+- Answer Relevancy: Very High (direct quote answer)
+
+---
+
+### Question 8: Multi-Mission Comparison
+**Question:** "Compare the outcomes of Apollo 11 and Apollo 13 missions."
+
+**Expected Response Should Include:**
+- Apollo 11: Successful moon landing, achieved primary objective
+- Apollo 13: Aborted moon landing, but successful crew rescue
+- Both demonstrated NASA's capabilities
+- Apollo 11: Historic achievement; Apollo 13: Technical problem-solving
+- Both returned crews safely to Earth
+
+**RAGAS Metrics Expected:**
+- Context Precision: High (documents from both missions)
+- Context Recall: High (covers both missions comprehensively)
+- Faithfulness: High (accurate comparison)
+- Answer Relevancy: High (addresses comparison request)
+
+---
+
+## Evaluation Notes
+
+### Testing Procedure:
+1. Enter each question into the chat interface
+2. Review the response for accuracy and completeness
+3. Check RAGAS evaluation scores displayed
+4. Verify that relevant source documents are retrieved
+5. Confirm response stays faithful to source material
+
+### Expected System Behavior:
+- Response time: 2-5 seconds per query
+- Source citations: Should include mission name and document type
+- Evaluation scores: Should be displayed automatically after each response
+- Context window: Should retrieve 3-5 most relevant document chunks
+
+### Quality Criteria:
+- **Accuracy**: Responses match historical facts
+- **Relevance**: Answers directly address the question
+- **Completeness**: Covers key aspects of the topic
+- **Source Attribution**: Clearly indicates information sources
+- **Clarity**: Easy to understand and well-structured
+
+---
+
+## Additional Test Scenarios
+
+### Edge Cases to Test:
+1. Very specific technical questions (test precision)
+2. Broad overview questions (test coverage)
+3. Questions requiring information synthesis from multiple documents
+4. Questions about events not in the database (test hallucination prevention)
+5. Follow-up questions in conversation (test context maintenance)
+
+### Expected Failure Scenarios:
+- Questions about missions not in database (should indicate lack of information)
+- Highly technical questions beyond scope of documents (should acknowledge limitations)
+- Ambiguous questions (should ask for clarification or provide multiple interpretations)
