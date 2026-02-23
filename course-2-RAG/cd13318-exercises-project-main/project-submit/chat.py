@@ -156,7 +156,7 @@ def main():
             st.warning("Please enter your OpenAI API key")
             st.stop()
         else:
-            os.environ["CHROMA_OPENAI_API_KEY"] = openai_key
+            os.environ["OPENAI_API_KEY"] = openai_key
         
         # Model selection
         model_choice = st.selectbox(

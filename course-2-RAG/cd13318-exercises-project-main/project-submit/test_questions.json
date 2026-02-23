@@ -1,0 +1,98 @@
+{
+  "description": "NASA Mission Intelligence - Ground Truth Evaluation Dataset",
+  "version": "1.0",
+  "notes": "Reference answers and contexts are derived from actual NASA source documents in the ChromaDB collection. These serve as ground truth for RAGAS metric evaluation.",
+  "test_questions": [
+    {
+      "id": 1,
+      "category": "overview",
+      "question": "What happened during the Apollo 11 moon landing?",
+      "reference_answer": "Apollo 11 launched on July 16, 1969, from Kennedy Space Center. On July 20, 1969, astronauts Neil Armstrong and Edwin 'Buzz' Aldrin landed on the Moon in the lunar module Eagle in the Sea of Tranquility, while Michael Collins remained in lunar orbit in the Command Module Columbia. Upon stepping onto the lunar surface, Armstrong said 'That's one small step for a man, one giant leap for mankind.' The mission's principal objectives were completely accomplished with no failures or anomalies.",
+      "reference_contexts": [
+        "Saturn V AS-506 (Apollo 11 Mission) was launched at 09:32:00 Eastern Daylight Time on July 16, 1969, from Kennedy Space Center, Complex 39, Pad A.",
+        "The spacecraft landed in the Sea of Tranquility at 102:45:40 g.e.t. The landing coordinates were latitude 0 degrees 41 minutes 15 seconds N and longitude 23 degrees 26 minutes E.",
+        "ARMSTRONG That's one small step for a man. One giant leap for mankind.",
+        "The Principal and Secondary Detailed Objectives of this mission were completely accomplished. No failures, anomalies, or deviations occurred that seriously affected the flight or mission."
+      ]
+    },
+    {
+      "id": 2,
+      "category": "emergency",
+      "question": "What problem occurred during the Apollo 13 mission and how did the crew survive?",
+      "reference_answer": "During the Apollo 13 mission, flown April 11 to 17, 1970, an oxygen tank explosion caused the pressure to rapidly drop in the service module liquid oxygen tank number 2, and fuel cells 1 and 3 failed shortly thereafter. Commander Jim Lovell reported 'Houston, we've had a problem. We've had a MAIN B BUS UNDERVOLT.' A decision was made to abort the lunar landing and use the lunar module as a lifeboat for the crew to return to Earth, using its consumables for life support. The crew successfully returned to Earth.",
+      "reference_contexts": [
+        "Houston, we've had a problem. We've had a MAIN B BUS UNDERVOLT.",
+        "the pressure rapidly dropped in the service module liquid oxygen tank number 2 and fuel cells 1 and 3 failed shortly thereafter.",
+        "the lunar module would serve as a sort of lifeboat for the crew of Apollo 13.",
+        "A decision was made to scrub any attempt at landing and continue on a lunar fly-by deep space abort type mission. The dropping pressure in the remaining liquid oxygen tank led to the decision to use the lunar module for a sort of lifeboat to come back to earth using its consumables for life support."
+      ]
+    },
+    {
+      "id": 3,
+      "category": "crew",
+      "question": "Who were the crew members of Apollo 11?",
+      "reference_answer": "The crew of Apollo 11 consisted of Neil A. Armstrong as Commander, Michael Collins as Command Module Pilot, and Edwin E. Aldrin, Jr. as Lunar Module Pilot. Armstrong and Aldrin descended to the lunar surface in the Eagle lunar module, while Collins remained in lunar orbit aboard the Command Module Columbia.",
+      "reference_contexts": [
+        "The members of the crew were Neil A. Armstrong, Commander; Michael Collins, Command Module Pilot; and Edwin E. Aldrin, Jr., Lunar Module Pilot.",
+        "The crew consists of Neil Armstrong (Mission Commander), Lt. Col. Michael Collins (Command Module Pilot), and Lt. Col. Edwin Aldrin, Jr. (Lunar Module Pilot)."
+      ]
+    },
+    {
+      "id": 4,
+      "category": "disaster_analysis",
+      "question": "What caused the Challenger disaster?",
+      "reference_answer": "The Space Shuttle Challenger (STS-51L) experienced a catastrophic failure on January 28, 1986. The vehicle exploded approximately one minute into the flight. The launch had been delayed due to unacceptable weather conditions. The crew of seven was lost, including commander Francis Dick Scobee, pilot Michael Smith, mission specialists Judy Resnick, Ellison Onizuka, and Ronald McNair, payload specialist Greg Jarvis, and teacher Christa McAuliffe. Flight dynamics reported that the vehicle had exploded.",
+      "reference_contexts": [
+        "The 51 hour crew members are commander Francis Dick Scobie pilot Michael Smith Mission specialist Judy Resnick Ellison Onizuka Ronald McNair and payload specialist Greg Jarvis along with teacher and space participant Krista McAuliffe.",
+        "remained in a hold due to unacceptable weather conditions in the area at the originally planned launch time",
+        "We have a report from the flight dynamics officer that the vehicle has exploded.",
+        "At about approximately a minute or so into the flight there was an apparent explosion.",
+        "That is the way we shall commemorate our seven challenger heroes."
+      ]
+    },
+    {
+      "id": 5,
+      "category": "timeline",
+      "question": "When did Apollo 11 and Apollo 13 missions take place?",
+      "reference_answer": "Apollo 11 was launched at 09:32:00 Eastern Daylight Time on July 16, 1969, from Kennedy Space Center. The lunar landing occurred on July 20, 1969, with first contact at 9:56:15 p.m. EST. The Apollo 13 mission was flown April 11 to 17, 1970. During Apollo 13, the oxygen tank crisis occurred on April 13, 1970, and the crew returned safely to Earth on April 17, 1970.",
+      "reference_contexts": [
+        "Saturn V AS-506 (Apollo 11 Mission) was launched at 09:32:00 Eastern Daylight Time on July 16, 1969, from Kennedy Space Center, Complex 39, Pad A.",
+        "with first contact made at 109:24:15 g.e.t. (9:56:15 p.m. e.s.t., July 20, 1969).",
+        "The Apollo 13 mission was flown April 11 to 17, 1970."
+      ]
+    },
+    {
+      "id": 6,
+      "category": "technical",
+      "question": "What was the Eagle in the Apollo 11 mission?",
+      "reference_answer": "The Eagle was the call sign of the Lunar Module (LM-5) on the Apollo 11 mission. When the lunar module separated from the command module in lunar orbit, it used the call sign Eagle, while the command module used the call sign Columbia. The Eagle carried astronauts Neil Armstrong and Buzz Aldrin to the lunar surface in the Sea of Tranquility.",
+      "reference_contexts": [
+        "The lunar module on Apollo 11, of course, when it separates from the command module in lunar orbit, will have the call sign Eagle. The command module call sign, once the 2 vehicles separate, will be Columbia.",
+        "The SC consists of Command and Service Module (CSM)-107 and Lunar Module (LM)-5.",
+        "The spacecraft landed in the Sea of Tranquility at 102:45:40 g.e.t."
+      ]
+    },
+    {
+      "id": 7,
+      "category": "crew",
+      "question": "What famous phrase did Neil Armstrong say when stepping on the Moon?",
+      "reference_answer": "When Neil Armstrong first stepped onto the lunar surface during the Apollo 11 mission, he said: 'That's one small step for a man, one giant leap for mankind.' This became one of the most famous quotes in human history, marking the moment humanity first set foot on another celestial body.",
+      "reference_contexts": [
+        "ARMSTRONG That's one small step for a man. One giant leap for mankind.",
+        "THAT'S ONE SMALL STEP FOR (A) MAN, ONE GIANT LEAP FOR MANKIND."
+      ]
+    },
+    {
+      "id": 8,
+      "category": "overview",
+      "question": "Compare the outcomes of Apollo 11 and Apollo 13 missions.",
+      "reference_answer": "Apollo 11 was a complete success - its purpose was to land men on the lunar surface and return them safely, and all principal and secondary detailed objectives were completely accomplished with no failures, anomalies, or deviations. Apollo 13, flown April 11 to 17, 1970, experienced an oxygen tank explosion that caused fuel cell failures. The lunar landing was aborted, and the mission became a rescue operation. The crew used the lunar module as a lifeboat to return safely to Earth. While Apollo 11 achieved its primary objective of a Moon landing, Apollo 13 demonstrated NASA's ability to handle emergencies and bring the crew home safely.",
+      "reference_contexts": [
+        "The purpose of the Apollo 11 mission was to land men on the lunar surface and to return them safely.",
+        "The Principal and Secondary Detailed Objectives of this mission were completely accomplished. No failures, anomalies, or deviations occurred that seriously affected the flight or mission.",
+        "A decision was made to scrub any attempt at landing and continue on a lunar fly-by deep space abort type mission. The dropping pressure in the remaining liquid oxygen tank led to the decision to use the lunar module for a sort of lifeboat to come back to earth using its consumables for life support.",
+        "The Apollo 13 mission was flown April 11 to 17, 1970."
+      ]
+    }
+  ]
+}

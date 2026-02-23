@@ -1,7 +1,9 @@
 import chromadb
 from chromadb.config import Settings
+from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
 from typing import Dict, List, Optional
 from pathlib import Path
+import os
 
 def discover_chroma_backends() -> Dict[str, Dict[str, str]]:
     """Discover available ChromaDB backends in the project directory"""
@@ -73,8 +75,22 @@ def initialize_rag_system(chroma_dir: str, collection_name: str):
         )
     )
     
-    # Return the collection with the collection_name
-    collection = client.get_collection(name=collection_name)
+    # Get OpenAI API key from environment
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    if not openai_api_key:
+        return None, False, "OpenAI API key not found in environment variables"
+    
+    # Create OpenAI embedding function matching the one used during collection creation
+    embedding_function = OpenAIEmbeddingFunction(
+        api_key=openai_api_key,
+        model_name="text-embedding-3-small"
+    )
+    
+    # Return the collection with the collection_name and embedding function
+    collection = client.get_collection(
+        name=collection_name,
+        embedding_function=embedding_function
+    )
     # I have added the other two return values along with collection as this is what is expected when this function is called in the chat.py
     return collection, True, None
 
