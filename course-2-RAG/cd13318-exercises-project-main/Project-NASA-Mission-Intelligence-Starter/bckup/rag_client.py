@@ -117,61 +117,35 @@ def retrieve_documents(collection, query: str, n_results: int = 3,
     # Return query results to caller
     return results
 
-def format_context(documents: List[str], metadatas: List[Dict],
-                   distances: Optional[List[float]] = None) -> str:
-    """Format retrieved documents into context with deduplication and score sorting.
-
-    Deduplicates identical or near-identical chunks and sorts results by
-    similarity score so the most relevant documents appear first.
-    """
+def format_context(documents: List[str], metadatas: List[Dict]) -> str:
+    """Format retrieved documents into context"""
     if not documents:
         return ""
-
-    # Assign default distances if not provided (preserve original order)
-    if distances is None:
-        distances = list(range(len(documents)))
-
-    # Bundle documents with their metadata and distances, then sort by
-    # distance (lower distance = higher similarity in ChromaDB)
-    combined = sorted(
-        zip(documents, metadatas, distances),
-        key=lambda x: x[2]
-    )
-
-    # Deduplicate: skip documents whose text has already been seen.
-    # Uses a normalized comparison (stripped whitespace) so near-identical
-    # chunks with minor whitespace differences are also caught.
-    seen_texts: set = set()
-    unique_items = []
-    for doc, meta, dist in combined:
-        normalized = doc.strip()
-        if normalized not in seen_texts:
-            seen_texts.add(normalized)
-            unique_items.append((doc, meta, dist))
-
+    
     # Initialize list with header text for context section
     context_sections = ["**** RAG Context *****"]
 
-    # Loop through deduplicated and sorted documents
-    for i, (doc, meta, _dist) in enumerate(unique_items):
+    # Loop through paired documents and their metadata using enumeration
+    for i, (doc, meta) in enumerate(zip(documents, metadatas)):
         # Extract mission information from metadata with fallback value
+        # I have used unkown for the fallback value as the embedding pipeline returns unkown if no mission.
         mission = meta.get("mission", "Unknown Mission")
         # Clean up mission name formatting (replace underscores, capitalize)
         mission = mission.replace("_", " ").title()
-
+        
         # Extract source information from metadata with fallback value
         source = meta.get("source", "Unknown Source")
-
+        
         # Extract category information from metadata with fallback value
         category = meta.get("document_category", "General")
         # Clean up category name formatting (replace underscores, capitalize)
         category = category.replace("_", " ").title()
-
+        
         # Create formatted source header with index number and extracted information
         header = f"\n--- Source {i+1}: {mission} | {source} | {category} ---"
         # Add source header to context parts list
         context_sections.append(header)
-
+        
         # Check document length and truncate if necessary
         if len(doc) > 2500:
             context_sections.append(doc[:2500] + "... [Max Length of 2500 char reached!]")
